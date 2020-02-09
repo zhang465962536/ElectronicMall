@@ -22,4 +22,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':my-ec')
     annotationProcessor project(path: ':my-complier')
+    implementation project(path: ':my-core')
 }
