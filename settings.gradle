@@ -1,0 +1,2 @@
+include ':example', ':my-annotations', ':my-complier', ':my-core', ':my-ec'
+rootProject.name='FestEC'
