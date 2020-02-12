@@ -37,7 +37,7 @@ public class RestCreator {
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .build();
         //  .addInterceptor() 拦截器 在response 时候调用一次
-        //.addNetworkInterceptor() 拦截器 分别在 response  request 时候调用一次
+        //.addNetworkInterceptor() 拦截器 分别在 response  request 时候调用一次1
 
     }
 
