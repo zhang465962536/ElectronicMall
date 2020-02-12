@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.example.my_core.delegates.LatteDelegate;
 
 public class ExampleDelegate extends LatteDelegate {
+    //设置布局
     @Override
     public Object setLayout() {
         return R.layout.delegate_example;
