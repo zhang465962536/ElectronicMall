@@ -10,12 +10,16 @@ import com.example.my_core.net.callback.RequestCallbacks;
 import com.example.my_core.ui.LatteLoader;
 import com.example.my_core.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
 
 //RESTful
 //编写网络框架 传入什么参数就用什么 使用建造者模式
@@ -32,10 +36,11 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
+    private final File FILE;
     private LoaderStyle LOADER_STYLE;
     private final Context CONTEXT;
 
-    public RestClient(String url, Map<String, Object> params, IRequest request, ISuecess suecess, IFailure failure, IError error, RequestBody body,Context context,LoaderStyle loaderStyle) {
+    public RestClient(String url, Map<String, Object> params, IRequest request, ISuecess suecess, IFailure failure, IError error, RequestBody body,File file,Context context,LoaderStyle loaderStyle) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -45,6 +50,7 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
         this.BODY = body;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
+        this.FILE = file;
     }
 
     //创建构造者
@@ -73,11 +79,22 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
             case POST:
                 call = service.get(URL,PARAMS);
                 break;
+            case POST_RAW:
+                 call = service.postRaw(URL,BODY);
+                break;
             case PUT:
                 call = service.get(URL,PARAMS);
                 break;
+            case PUT_RAW:
+                call = service.postRaw(URL,BODY);
+                break;
             case DELETE:
                 call = service.get(URL,PARAMS);
+                break;
+            case UPLOAD:
+                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()),FILE);
+                final MultipartBody.Part body = MultipartBody.Part.createFormData("file",FILE.getName(),requestBody);//以For形式提交文件
+                call = RestCreator.getRestService().upload(URL,body);
                 break;
             default:
                 break;
@@ -107,10 +124,26 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
         request(HttpMethod.GET);
     }
     public final void post(){
-        request(HttpMethod.POST);
+        if(BODY == null){  //如果 BODY 为空 使用默认的post
+            request(HttpMethod.POST);
+        }else {
+            if(!PARAMS.isEmpty()){ //如果参数不是空的  如果post一个原始数据的话 这个参数一定为空
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
+
     }
     public final void put(){
-        request(HttpMethod.PUT);
+        if(BODY == null){  //如果 BODY 为空 使用默认的put
+            request(HttpMethod.PUT);
+        }else {
+            if(!PARAMS.isEmpty()){ //如果参数不是空的  如果put一个原始数据的话 这个参数一定为空
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
+
     }
     public final void delete(){
         request(HttpMethod.DELETE);

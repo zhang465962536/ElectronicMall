@@ -8,6 +8,7 @@ import com.example.my_core.net.callback.IRequest;
 import com.example.my_core.net.callback.ISuecess;
 import com.example.my_core.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -28,6 +29,7 @@ public class RestClientBuilder {  //主要做传值操作
     private  RequestBody mBody = null;
     private Context mContext = null;
     private LoaderStyle mLoaderStyle = null;
+    private File mFile = null;
 
     //不允许外部类直接 new RestClientBuilder 只允许同包使用
     RestClientBuilder(){
@@ -42,6 +44,16 @@ public class RestClientBuilder {  //主要做传值操作
     public final RestClientBuilder params(WeakHashMap<String,Object> params){
         /*this.mParams = mParams;*/
         PARAMS.putAll(params);
+        return this;
+    }
+
+    public final RestClientBuilder file(File file){
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuilder file(String file){
+        this.mFile = new File(file);
         return this;
     }
 
@@ -106,7 +118,7 @@ public class RestClientBuilder {  //主要做传值操作
     }
     //Build RestClient
     public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuecess,mIFailure,mIError,mBody,mContext,mLoaderStyle);
+        return new RestClient(mUrl,PARAMS,mIRequest,mISuecess,mIFailure,mIError,mBody,mFile,mContext,mLoaderStyle);
     }
 
 }
