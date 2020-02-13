@@ -3,7 +3,6 @@ package com.example.festec;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -11,7 +10,7 @@ import com.example.my_core.delegates.LatteDelegate;
 import com.example.my_core.net.RestClient;
 import com.example.my_core.net.callback.IError;
 import com.example.my_core.net.callback.IFailure;
-import com.example.my_core.net.callback.ISuecess;
+import com.example.my_core.net.callback.ISuccess;
 
 public class ExampleDelegate extends LatteDelegate {
     //设置布局
@@ -32,7 +31,7 @@ public class ExampleDelegate extends LatteDelegate {
                 .url("http://news.baidu.com/")
                 //.params("","")
                 .loader(getContext()) //使用加载窗体
-                .success(new ISuecess() {
+                .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
                         //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();

@@ -2,8 +2,6 @@ package com.example.my_core.net.callback;
 
 import android.os.Handler;
 
-import androidx.core.app.NavUtils;
-
 import com.example.my_core.ui.LatteLoader;
 import com.example.my_core.ui.LoaderStyle;
 
@@ -15,14 +13,14 @@ import retrofit2.Response;
 public class RequestCallbacks implements Callback<String> {
 
     private final IRequest REQUEST;
-    private final ISuecess SUECESS;
+    private final ISuccess SUECESS;
     private final IFailure FAILURE;
     private final IError ERROR;
     private final LoaderStyle LOADER_STYLE;
     //Handler尽量声明为 static 避免内存泄漏
     private static final Handler HANDLER = new Handler();
 
-    public RequestCallbacks(IRequest request, ISuecess suecess, IFailure failure, IError error, LoaderStyle loaderStyle) {
+    public RequestCallbacks(IRequest request, ISuccess suecess, IFailure failure, IError error, LoaderStyle loaderStyle) {
         this.REQUEST = request;
         this.SUECESS = suecess;
         this.FAILURE = failure;

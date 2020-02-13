@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatDialog;
 
 import com.example.my_core.R;
-import com.example.my_core.util.DimenUtil;
+import com.example.my_core.util.dimen.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
