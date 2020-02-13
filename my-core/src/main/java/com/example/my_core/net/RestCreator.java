@@ -3,6 +3,7 @@ package com.example.my_core.net;
 import com.example.my_core.app.ConfigType;
 import com.example.my_core.app.Latte;
 
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -11,6 +12,16 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 //创建 Retrofit
 public class RestCreator {
+
+    //声明一个全局变量 方便后面使用 使用单例懒汉模式创建 比较严谨
+    //public static final WeakHashMap<String,Object> PARAMS = new WeakHashMap<>();
+    private static final class ParamsHolder{
+        public static final WeakHashMap<String,Object> PARAMS = new WeakHashMap<>();
+    }
+
+    public static WeakHashMap<String,Object> getParams(){
+        return ParamsHolder.PARAMS;
+    }
 
     public static RestService getRestService(){
         return RestServiceHolder.REST_SERVICE;
