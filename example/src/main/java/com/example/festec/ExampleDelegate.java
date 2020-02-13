@@ -31,10 +31,11 @@ public class ExampleDelegate extends LatteDelegate {
         RestClient.builder()
                 .url("http://news.baidu.com/")
                 //.params("","")
+                .loader(getContext()) //使用加载窗体
                 .success(new ISuecess() {
                     @Override
                     public void onSuccess(String response) {
-                        Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
                         Log.e("onSuccessResponse",response);
                     }
                 })

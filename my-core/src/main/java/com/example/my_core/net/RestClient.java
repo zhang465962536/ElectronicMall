@@ -1,10 +1,14 @@
 package com.example.my_core.net;
 
+import android.content.Context;
+
 import com.example.my_core.net.callback.IError;
 import com.example.my_core.net.callback.IFailure;
 import com.example.my_core.net.callback.IRequest;
 import com.example.my_core.net.callback.ISuecess;
 import com.example.my_core.net.callback.RequestCallbacks;
+import com.example.my_core.ui.LatteLoader;
+import com.example.my_core.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -28,8 +32,10 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
+    private LoaderStyle LOADER_STYLE;
+    private final Context CONTEXT;
 
-    public RestClient(String url, Map<String, Object> params, IRequest request, ISuecess suecess, IFailure failure, IError error, RequestBody body) {
+    public RestClient(String url, Map<String, Object> params, IRequest request, ISuecess suecess, IFailure failure, IError error, RequestBody body,Context context,LoaderStyle loaderStyle) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -37,6 +43,8 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
+        this.CONTEXT = context;
+        this.LOADER_STYLE = loaderStyle;
     }
 
     //创建构造者
@@ -51,6 +59,11 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
 
         if (REQUEST != null) {
             REQUEST.onRequestStart();
+        }
+
+        //开始请求的时候 启动加载窗体
+        if(LOADER_STYLE != null){
+            LatteLoader.showLoading(CONTEXT,LOADER_STYLE);
         }
 
         switch (method) {
@@ -84,7 +97,8 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
                 REQUEST,
                 SUECESS,
                 FAILURE,
-                ERROR
+                ERROR,
+                LOADER_STYLE
         );
     }
 

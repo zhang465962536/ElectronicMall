@@ -1,9 +1,12 @@
 package com.example.my_core.net;
 
+import android.content.Context;
+
 import com.example.my_core.net.callback.IError;
 import com.example.my_core.net.callback.IFailure;
 import com.example.my_core.net.callback.IRequest;
 import com.example.my_core.net.callback.ISuecess;
+import com.example.my_core.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -15,14 +18,16 @@ import okhttp3.RequestBody;
 public class RestClientBuilder {  //主要做传值操作
 
     //建造者模式 值不能是final ，如果是final 就无法依次赋值
-    private  String mUrl;
+    private  String mUrl = null;
     //private  Map<String,Object> mParams;  //每次都需要去重新构建 在RestCreator声明一个全局变量即可
     private static final Map<String,Object> PARAMS = RestCreator.getParams();
-    private  IRequest mIRequest;
-    private  ISuecess mISuecess;
-    private  IFailure mIFailure;
-    private  IError mIError;
-    private  RequestBody mBody;
+    private  IRequest mIRequest = null;
+    private  ISuecess mISuecess = null;
+    private  IFailure mIFailure = null;
+    private  IError mIError = null;
+    private  RequestBody mBody = null;
+    private Context mContext = null;
+    private LoaderStyle mLoaderStyle = null;
 
     //不允许外部类直接 new RestClientBuilder 只允许同包使用
     RestClientBuilder(){
@@ -87,9 +92,21 @@ public class RestClientBuilder {  //主要做传值操作
         return mParams;
     }使用WeakHashMap 之后 就不需要判断是否为空了*/
 
+    public final RestClientBuilder loader(Context context,LoaderStyle loaderStyle){
+        this.mContext = context;
+        this.mLoaderStyle = loaderStyle;
+        return this;
+    }
+
+    //使用默认的Loader
+    public final RestClientBuilder loader(Context context){
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.BallClipRotatePulseIndicator;
+        return this;
+    }
     //Build RestClient
     public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuecess,mIFailure,mIError,mBody);
+        return new RestClient(mUrl,PARAMS,mIRequest,mISuecess,mIFailure,mIError,mBody,mContext,mLoaderStyle);
     }
 
 }
