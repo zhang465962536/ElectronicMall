@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.my_core.activities.ProxyActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -15,7 +18,7 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 public abstract class BaseDelegate extends SwipeBackFragment {
 
     private Unbinder mUnbinder = null;
-
+    protected FragmentActivity _mActivity = null;
     //传入布局
     public abstract Object setLayout();
     //强制子类绑定视图
@@ -29,6 +32,8 @@ public abstract class BaseDelegate extends SwipeBackFragment {
             rootView = inflater.inflate((Integer) setLayout(),container,false);
         }else if (setLayout() instanceof View){  // //如果setLayout()返回的是 View
             rootView = (View) setLayout();
+        }else {
+            throw new ClassCastException("setlayout() type must be int or View !");
         }
         if(rootView != null){ //如果root 不为空 绑定资源
             mUnbinder = ButterKnife.bind(this,rootView);   //这里绑定fragment 和 RootView
@@ -36,6 +41,10 @@ public abstract class BaseDelegate extends SwipeBackFragment {
         }
 
         return rootView;
+    }
+
+    public final FragmentActivity getProxyActivity(){
+        return getActivity();
     }
 
     //销毁的时候 判断 mUnbinder的情况 解除绑定
