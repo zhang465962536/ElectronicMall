@@ -1,4 +1,4 @@
-package com.example.my_core.ui;
+package com.example.my_core.ui.loader;
 
 import android.content.Context;
 

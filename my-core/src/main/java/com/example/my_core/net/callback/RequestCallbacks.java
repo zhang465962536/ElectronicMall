@@ -2,8 +2,8 @@ package com.example.my_core.net.callback;
 
 import android.os.Handler;
 
-import com.example.my_core.ui.LatteLoader;
-import com.example.my_core.ui.LoaderStyle;
+import com.example.my_core.ui.loader.LatteLoader;
+import com.example.my_core.ui.loader.LoaderStyle;
 
 
 import retrofit2.Call;

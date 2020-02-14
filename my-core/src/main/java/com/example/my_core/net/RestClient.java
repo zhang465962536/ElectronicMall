@@ -7,8 +7,9 @@ import com.example.my_core.net.callback.IFailure;
 import com.example.my_core.net.callback.IRequest;
 import com.example.my_core.net.callback.ISuecess;
 import com.example.my_core.net.callback.RequestCallbacks;
-import com.example.my_core.ui.LatteLoader;
-import com.example.my_core.ui.LoaderStyle;
+import com.example.my_core.net.download.DownloadHandler;
+import com.example.my_core.ui.loader.LatteLoader;
+import com.example.my_core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.example.my_core.ui;
+package com.example.my_core.ui.loader;
 
 //忽略编译警告
 @SuppressWarnings("unused")

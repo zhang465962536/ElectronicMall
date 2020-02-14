@@ -5,8 +5,8 @@ import android.content.Context;
 import com.example.my_core.net.callback.IError;
 import com.example.my_core.net.callback.IFailure;
 import com.example.my_core.net.callback.IRequest;
-import com.example.my_core.net.callback.ISuecess;
-import com.example.my_core.ui.LoaderStyle;
+import com.example.my_core.net.callback.ISuccess;
+import com.example.my_core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;

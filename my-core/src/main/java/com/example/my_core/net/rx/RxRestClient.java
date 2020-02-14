@@ -3,18 +3,9 @@ package com.example.my_core.net.rx;
 import android.content.Context;
 
 import com.example.my_core.net.HttpMethod;
-import com.example.my_core.net.RestClient;
-import com.example.my_core.net.RestClientBuilder;
 import com.example.my_core.net.RestCreator;
-import com.example.my_core.net.RestService;
-import com.example.my_core.net.callback.IError;
-import com.example.my_core.net.callback.IFailure;
-import com.example.my_core.net.callback.IRequest;
-import com.example.my_core.net.callback.ISuccess;
-import com.example.my_core.net.callback.RequestCallbacks;
-import com.example.my_core.net.download.DownloadHandler;
-import com.example.my_core.ui.LatteLoader;
-import com.example.my_core.ui.LoaderStyle;
+import com.example.my_core.ui.loader.LatteLoader;
+import com.example.my_core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;
@@ -25,8 +16,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 //RESTful
 //编写网络框架 传入什么参数就用什么 使用建造者模式
