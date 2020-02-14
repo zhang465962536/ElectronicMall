@@ -10,6 +10,8 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.my.ec.R;
 import com.example.my_core.delegates.LatteDelegate;
 import com.example.my_core.ui.launcher.LauncherHolderCreator;
+import com.example.my_core.ui.launcher.ScrollLauncherTag;
+import com.example.my_core.util.storage.LattePreference;
 
 import java.util.ArrayList;
 
@@ -50,6 +52,11 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
 
     @Override
     public void onItemClick(int position) {
-
+        //如果点击的是最后一个轮播图
+        if(position == INTEGERS.size() - 1){
+            //设置flag 表面已经是第一次进入该app 以后轮播图都不会再出现
+            LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(),true);
+            //检查用户是否已经登录
+        }
     }
 }
