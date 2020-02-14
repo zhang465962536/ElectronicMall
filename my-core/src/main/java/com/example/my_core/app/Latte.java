@@ -1,24 +1,32 @@
 package com.example.my_core.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
-import java.util.WeakHashMap;
 
 //对外的工具类  里面的方法都是 静态的
 public  final class Latte {
 
     //获取Application里面的Context
-    public static Configurator init(Context context){
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(),context.getApplicationContext());
+    public static Configurator init(Context context) {
+        Configurator.getInstance()
+                .getLatteConfigs()
+                .put(ConfigKeys.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String,Object> getConfigurations(){
-        return Configurator.getInstance().getLatteConfigs();
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
     }
 
-    public static Context getApplicationContext(){
-        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
     }
+
+    public static Context getApplicationContext() {
+        return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
+    }
+
+
 }

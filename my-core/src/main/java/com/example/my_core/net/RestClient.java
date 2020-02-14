@@ -38,6 +38,7 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
     private final RequestBody BODY;
     private final File FILE;
     private LoaderStyle LOADER_STYLE;
+    private final File FILE;
     private final Context CONTEXT;
 
     public RestClient(String url, Map<String, Object> params, IRequest request, ISuecess suecess, IFailure failure, IError error, RequestBody body,File file,Context context,LoaderStyle loaderStyle) {
@@ -48,6 +49,7 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
+        this.FILE = file;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
         this.FILE = file;

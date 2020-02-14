@@ -3,6 +3,7 @@ package com.example.festec;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -28,13 +29,13 @@ public class ExampleDelegate extends LatteDelegate {
     //测试创建的 RestClient 网络请求框架
     private void testRestClient(){
         RestClient.builder()
-                .url("http://news.baidu.com/")
+                .url("https://127.0.0.1/index")
                 //.params("","")
                 .loader(getContext()) //使用加载窗体
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
                         Log.e("onSuccessResponse",response);
                     }
                 })

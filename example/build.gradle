@@ -35,6 +35,11 @@ dependencies {
 //Fragment 依赖
     implementation 'me.yokeyword:fragmentationx:1.0.2'
     implementation 'me.yokeyword:fragmentationx-swipeback:1.0.2'
+    //网络请求依赖
+    implementation 'com.squareup.okio:okio:1.13.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
 
 
 }
