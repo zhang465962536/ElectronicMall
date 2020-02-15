@@ -35,7 +35,8 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         if(mTimer != null){
             mTimer.cancel();
             mTimer = null;
-            checkIsShowScroll();
+            start(new LauncherScrollDelegate(),SINGLETASK);
+            //checkIsShowScroll();
         }
     }
 
@@ -76,7 +77,8 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
                         if(mTimer != null){
                             mTimer.cancel();
                             mTimer = null;
-                            checkIsShowScroll();
+                            //checkIsShowScroll();
+                            start(new LauncherScrollDelegate(),SINGLETASK);
                         }
                     }
                 }

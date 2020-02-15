@@ -2,6 +2,12 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //可以将代码染化90% 生成代码的时候 需要一些方法把包名，依赖，类名直接生成出来
+    implementation 'com.squareup:javapoet:1.9.0'
+    //自动生成META-INF信息
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.google.auto:auto-common:0.8'
+    implementation project(path: ':my-annotations')
 }
 
 sourceCompatibility = "7"

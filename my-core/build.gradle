@@ -61,5 +61,10 @@ dependencies {
     implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     //解析Json依赖
     implementation 'com.alibaba:fastjson:1.2.31'
+    //Log
+    implementation 'com.orhanobut:logger:2.1.1'
+    //数据库依赖
+    implementation 'org.greenrobot:greendao-generator:3.2.2'
+    implementation 'org.greenrobot:greendao:3.2.2'
 
 }

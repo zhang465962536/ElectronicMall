@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.my.ec.R;
+import com.example.my.ec.sign.SignInDelegate;
 import com.example.my_core.delegates.LatteDelegate;
 import com.example.my_core.ui.launcher.LauncherHolderCreator;
 import com.example.my_core.ui.launcher.ScrollLauncherTag;
@@ -57,6 +58,7 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
             //设置flag 表面已经是第一次进入该app 以后轮播图都不会再出现
             LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(),true);
             //检查用户是否已经登录
+            start(new SignInDelegate());
         }
     }
 }
