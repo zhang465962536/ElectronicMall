@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBar;
 
 import com.example.my.ec.launcher.LauncherDelegate;
 import com.example.my.ec.launcher.LauncherScrollDelegate;
+import com.example.my.ec.main.EcBottomDelegate;
 import com.example.my.ec.sign.SignInDelegate;
 import com.example.my.ec.sign.SignUpDelegate;
 import com.example.my_core.activities.ProxyActivity;
@@ -30,6 +31,6 @@ public  class ExampleActivity extends ProxyActivity {
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new EcBottomDelegate();
     }
 }

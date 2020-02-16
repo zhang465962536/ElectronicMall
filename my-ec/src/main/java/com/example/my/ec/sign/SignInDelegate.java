@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
+import com.example.my.ec.main.EcBottomDelegate;
 import com.example.my_core.delegates.LatteDelegate;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -26,7 +27,7 @@ public class SignInDelegate extends LatteDelegate {
     @OnClick(R2.id.btn_sign_in)
     void onClickSignIn() {
         if(checkForm()){
-
+            start(new EcBottomDelegate());
         }
     }
 
