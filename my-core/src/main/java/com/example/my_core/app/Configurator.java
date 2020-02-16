@@ -1,5 +1,7 @@
 package com.example.my_core.app;
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -79,6 +81,25 @@ public class Configurator {
         LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR,INTERCEPTORS);
         return this;
     }
+
+    //传入微信APP_ID
+    public final Configurator withWeChatAppId(String appId){
+        LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_ID,appId);
+        return this;
+    }
+
+    //传入微信APP_Secret
+    public final Configurator withWeChatAppSecret(String appSecret){
+        LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_SECRET,appSecret);
+        return this;
+    }
+    //微信拉取回调Activity 时候 会需要一个Activity 的上下文 使用全局Application的Activity 是不合适的
+    public final Configurator withActivity(Activity activity){
+        LATTE_CONFIGS.put(ConfigKeys.ACTIVITY,activity);
+        return this;
+    }
+
+
 
     //检查配置项目是否完成
     private void checkConfiguration() {

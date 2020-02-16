@@ -1,5 +1,7 @@
 apply plugin: 'java-library'
-
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //可以将代码染化90% 生成代码的时候 需要一些方法把包名，依赖，类名直接生成出来

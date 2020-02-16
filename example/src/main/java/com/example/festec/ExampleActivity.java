@@ -11,6 +11,7 @@ import com.example.my.ec.launcher.LauncherScrollDelegate;
 import com.example.my.ec.sign.SignInDelegate;
 import com.example.my.ec.sign.SignUpDelegate;
 import com.example.my_core.activities.ProxyActivity;
+import com.example.my_core.app.Latte;
 import com.example.my_core.delegates.LatteDelegate;
 
 
@@ -23,6 +24,8 @@ public  class ExampleActivity extends ProxyActivity {
         if(actionBar != null){
             actionBar.hide(); //隐藏标题栏
         }
+        //将当前Activity 传入 Configurator 配置文件保存
+        Latte.getConfigurator().withActivity(this);
     }
 
     @Override
