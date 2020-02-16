@@ -1,6 +1,7 @@
 package com.example.my_core.app;
 
 import android.app.Activity;
+import android.os.Handler;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -21,9 +22,11 @@ public class Configurator {
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
     //拦截器
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
     private Configurator() {
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), false);//刚开始是没有配置的 .name 是输出 false 代表没有配置
+        LATTE_CONFIGS.put(ConfigKeys.HANDLER, HANDLER);
     }
 
     //线程安全 懒汉模式
