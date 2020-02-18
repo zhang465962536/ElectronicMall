@@ -12,8 +12,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
+import com.example.my_core.ui.recycler.MultipleFields;
+import com.example.my_core.ui.recycler.MultipleItemEntity;
 import com.example.my_core.ui.refresh.RefreshHandler;
+import com.example.my_core.util.file.FileUtil;
+import com.example.my_core.util.log.ToastUtil;
 import com.joanzapata.iconify.widget.IconTextView;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -31,12 +37,13 @@ public class IndexDelegate extends BottomItemDelegate {
     @BindView(R2.id.et_search_view)
     EditText mSearchView = null;
 
-    private RefreshHandler mRefreshHandler =  null;
+    private RefreshHandler mRefreshHandler = null;
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        mRefreshHandler.firstPage(R.raw.index_data);
     }
 
     @Override
@@ -47,10 +54,17 @@ public class IndexDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = new RefreshHandler(mRefreshLayout);
+        final String json = FileUtil.getRawFile(R.raw.index_data);
+        final IndexDataConverter converter = new IndexDataConverter();
+        converter.setJsonData(json);
+        final ArrayList<MultipleItemEntity> list = converter.convert();
+        final  String image = list.get(1).getField(MultipleFields.IMAGE_URL);
+        ToastUtil.QuickToast(image);
+
     }
 
     //初始化下拉刷新控件
-    private void initRefreshLayout(){
+    private void initRefreshLayout() {
         //刷新时候 加载圈颜色变化
         mRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_light,
@@ -61,7 +75,7 @@ public class IndexDelegate extends BottomItemDelegate {
         //setProgressViewOffset() 移动过程中的表现
         //scale 为 true 下拉过程中 加载球 就会由小变大 回弹过程中 由大变小 flase 反之
         //120是起始高度  300是下降终止高度
-        mRefreshLayout.setProgressViewOffset(true,120,300);
+        mRefreshLayout.setProgressViewOffset(true, 120, 300);
     }
 
 

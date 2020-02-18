@@ -23,7 +23,8 @@ public class ExampleDelegate extends LatteDelegate {
     //对控件做的操作
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-            testRestClient();
+
+        //testRestClient();
     }
 
     //测试创建的 RestClient 网络请求框架
