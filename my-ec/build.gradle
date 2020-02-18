@@ -50,6 +50,6 @@ dependencies {
     //解析Json依赖
     implementation 'com.alibaba:fastjson:1.1.57.android'
     //BaseRecyclerViewAdapterHelper
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
 
 }
