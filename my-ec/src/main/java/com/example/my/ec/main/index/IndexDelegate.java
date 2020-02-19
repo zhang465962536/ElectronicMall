@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -43,7 +44,9 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        initRecyclerView();
         mRefreshHandler.firstPage(R.raw.index_data);
+
     }
 
     @Override
@@ -53,13 +56,7 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        final String json = FileUtil.getRawFile(R.raw.index_data);
-        final IndexDataConverter converter = new IndexDataConverter();
-        converter.setJsonData(json);
-        final ArrayList<MultipleItemEntity> list = converter.convert();
-        final  String image = list.get(1).getField(MultipleFields.IMAGE_URL);
-        ToastUtil.QuickToast(image);
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
 
     }
 
@@ -76,6 +73,13 @@ public class IndexDelegate extends BottomItemDelegate {
         //scale 为 true 下拉过程中 加载球 就会由小变大 回弹过程中 由大变小 flase 反之
         //120是起始高度  300是下降终止高度
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
+    }
+
+    //初始化recyclerView的布局
+    private void initRecyclerView(){
+        //网格布局 一行4个 格子
+        final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
+        mRecyclerView.setLayoutManager(manager);
     }
 
 
