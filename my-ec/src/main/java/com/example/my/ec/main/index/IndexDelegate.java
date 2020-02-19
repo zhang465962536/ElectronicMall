@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
+import com.example.my.ec.main.EcBottomDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
 import com.example.my_core.ui.recycler.BaseDecoration;
 import com.example.my_core.ui.recycler.MultipleFields;
@@ -84,7 +85,10 @@ public class IndexDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         //添加分割线
         mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
-    }
+        //点击商品之后 切换整个界面  BottomItem 栏也需要消失 所以获取最大的fragment
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+   }
 
 
 }
