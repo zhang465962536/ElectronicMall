@@ -43,6 +43,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     annotationProcessor project(path: ':my-annotations')
     implementation project(path: ':my-annotations')
+    //沉浸式状态栏
+    implementation ('com.github.niorgai:StatusBarCompat:2.3.3', {
+        exclude group: 'androidx.appcompat:appcompat'
+        exclude group: 'com.google.android.material:material'
+    })
+
 
 
 }

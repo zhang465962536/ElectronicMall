@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!--SwipeRefreshLayout 向下滑动控件-->
@@ -23,6 +24,7 @@
         android:id="@+id/tb_index"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        app:layout_behavior="com.example.my.ec.main.index.TranslucentBehavior"
         android:background="@android:color/transparent">
 
         <LinearLayout

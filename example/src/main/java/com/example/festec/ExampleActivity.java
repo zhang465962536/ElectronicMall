@@ -15,6 +15,8 @@ import com.example.my_core.activities.ProxyActivity;
 import com.example.my_core.app.Latte;
 import com.example.my_core.delegates.LatteDelegate;
 
+import qiu.niorgai.StatusBarCompat;
+
 
 public  class ExampleActivity extends ProxyActivity {
 
@@ -27,6 +29,8 @@ public  class ExampleActivity extends ProxyActivity {
         }
         //将当前Activity 传入 Configurator 配置文件保存
         Latte.getConfigurator().withActivity(this);
+        //沉浸式状态栏
+        StatusBarCompat.translucentStatusBar(this,true);
     }
 
     @Override
