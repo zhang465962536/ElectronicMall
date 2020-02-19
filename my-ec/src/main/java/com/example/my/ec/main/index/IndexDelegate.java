@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
+import com.example.my_core.ui.recycler.BaseDecoration;
 import com.example.my_core.ui.recycler.MultipleFields;
 import com.example.my_core.ui.recycler.MultipleItemEntity;
 import com.example.my_core.ui.refresh.RefreshHandler;
@@ -80,6 +82,8 @@ public class IndexDelegate extends BottomItemDelegate {
         //网格布局 一行4个 格子
         final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(manager);
+        //添加分割线
+        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
     }
 
 

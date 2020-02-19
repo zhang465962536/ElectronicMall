@@ -51,5 +51,6 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.1.57.android'
     //BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
-
+//RecyclerView分割线
+    implementation 'com.choices.divider:RecyclerView_Divider:1.0.0'
 }
