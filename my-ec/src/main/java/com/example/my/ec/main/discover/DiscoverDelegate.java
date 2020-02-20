@@ -7,6 +7,11 @@ import androidx.annotation.Nullable;
 
 import com.example.my.ec.R;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
+import com.example.my_core.delegates.web.WebDelegate;
+import com.example.my_core.delegates.web.WebDelegateImpl;
+
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 //发现
 public class DiscoverDelegate extends BottomItemDelegate {
@@ -18,6 +23,20 @@ public class DiscoverDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        final WebDelegateImpl delegate = WebDelegateImpl.create("first.html");
+        loadRootFragment(R.id.web_discovery_container, delegate);
+    }
+
+    //添加横向动画
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultHorizontalAnimator();
 
     }
 }
