@@ -16,11 +16,7 @@ import com.example.my.ec.R2;
 import com.example.my.ec.main.EcBottomDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
 import com.example.my_core.ui.recycler.BaseDecoration;
-import com.example.my_core.ui.recycler.MultipleFields;
-import com.example.my_core.ui.recycler.MultipleItemEntity;
 import com.example.my_core.ui.refresh.RefreshHandler;
-import com.example.my_core.util.file.FileUtil;
-import com.example.my_core.util.log.ToastUtil;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;

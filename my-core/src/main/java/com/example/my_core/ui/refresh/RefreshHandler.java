@@ -70,7 +70,6 @@ public class RefreshHandler implements
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        ToastUtil.QuickToast(response);
                         Log.e("firstPage", "onSuccess: " + response );
 
                         final JSONObject object = JSON.parseObject(response);
@@ -91,7 +90,6 @@ public class RefreshHandler implements
     public void firstPage(@RawRes int rawId){
         BEAN.setDelayed(1000);
         final String json = FileUtil.getRawFile(rawId);
-        ToastUtil.QuickToast(json);
         Log.e("firstPage", "onSuccess: " + json);
 
         final JSONObject object = JSON.parseObject(json);

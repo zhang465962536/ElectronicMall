@@ -10,5 +10,5 @@ public enum MultipleFields {
     SPAN_SIZE,  //控制Item宽度
     ID,
     NAME,
-    TAG
+    TAG  //标记第一个选择的状态 true 为点击 false 为未点击
 }
