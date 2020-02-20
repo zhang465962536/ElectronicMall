@@ -14,12 +14,13 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
 //WebDelegate 是承载WEB页面的基础核心
-public abstract class WebDelegate extends LatteDelegate implements IWebViewInitializer{
+public abstract class WebDelegate extends LatteDelegate implements IWebViewInitializer {
 
     private WebView mWebView = null;
     private final ReferenceQueue<WebView> WEB_VIEW_QUEUE = new ReferenceQueue<>();
     private String mUrl = null;
     private boolean mIsWebViewAbailable = false;
+    private LatteDelegate mTopDelegate = null;
 
     public WebDelegate() {
     }
@@ -38,50 +39,60 @@ public abstract class WebDelegate extends LatteDelegate implements IWebViewIniti
 
     //初始化WebView
     @SuppressLint("JavascriptInterface")
-    private void initWebView(){
+    private void initWebView() {
         //避免WebView 重复初始化 导致内存泄漏
-        if(mWebView != null){
+        if (mWebView != null) {
             mWebView.removeAllViews();
             mWebView.destroy();
-        }else {
+        } else {
             final IWebViewInitializer initializer = setInitializer();
-            if(initializer != null){
+            if (initializer != null) {
                 //如果WebView如果写在 XML里面 国内外各大网站会有相应的描述 容易造成内存泄漏 。如果在代码中new 的WebView 可以很大程度上避免
-                final WeakReference<WebView> webViewWeakReference = new WeakReference<WebView>(new WebView(getContext()),WEB_VIEW_QUEUE);
+                final WeakReference<WebView> webViewWeakReference = new WeakReference<WebView>(new WebView(getContext()), WEB_VIEW_QUEUE);
                 mWebView = webViewWeakReference.get();
-                mWebView= initializer.initWebView(mWebView);
+                mWebView = initializer.initWebView(mWebView);
                 mWebView.setWebViewClient(initializer.initWebViewClient());
                 mWebView.setWebChromeClient(initializer.initWebChromeClient());
                 //添加  JS接口 用于WebView 和原生 进行交互的
-                mWebView.addJavascriptInterface(LatteWebInterface.create(this),"latte");
+                mWebView.addJavascriptInterface(LatteWebInterface.create(this), "latte");
                 //可以使用WebView了
                 mIsWebViewAbailable = true;
-            }else {
+            } else {
                 throw new NullPointerException("Initializer is NuLL");
             }
         }
     }
 
-    public WebView getWebView(){
-        if(mWebView == null){
-            throw new NullPointerException("WebView IS NULL!");
-        }
-        return mIsWebViewAbailable ? mWebView: null;
+    public void setTopDelegate(LatteDelegate delegate) {
+        mTopDelegate = delegate;
     }
 
-    public String getUrl(){
-        if(mUrl == null){
+    public LatteDelegate getTopDelegate() {
+        if (mTopDelegate == null) {
+            mTopDelegate = this;
+        }
+        return mTopDelegate;
+    }
+
+    public WebView getWebView() {
+        if (mWebView == null) {
+            throw new NullPointerException("WebView IS NULL!");
+        }
+        return mIsWebViewAbailable ? mWebView : null;
+    }
+
+    public String getUrl() {
+        if (mUrl == null) {
             throw new NullPointerException("Url IS NULL!");
         }
         return mUrl;
     }
 
 
-
     @Override
     public void onPause() {
         super.onPause();
-        if(mWebView != null){
+        if (mWebView != null) {
             mWebView.onPause();
         }
     }
@@ -89,7 +100,7 @@ public abstract class WebDelegate extends LatteDelegate implements IWebViewIniti
     @Override
     public void onResume() {
         super.onResume();
-        if(mWebView != null){
+        if (mWebView != null) {
             mWebView.onResume();
         }
     }
@@ -103,7 +114,7 @@ public abstract class WebDelegate extends LatteDelegate implements IWebViewIniti
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mWebView != null){
+        if (mWebView != null) {
             mWebView.removeAllViews();
             mWebView.destroy();
             mWebView = null;

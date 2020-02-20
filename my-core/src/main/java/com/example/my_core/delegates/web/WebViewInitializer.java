@@ -1,5 +1,6 @@
 package com.example.my_core.delegates.web;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -8,6 +9,8 @@ import androidx.fragment.app.FragmentActivity;
 
 public class WebViewInitializer {
 
+
+    @SuppressLint("SetJavaScriptEnabled")
     public WebView createWebView(WebView webView){
 
         //可调试
@@ -27,6 +30,8 @@ public class WebViewInitializer {
         });
         //初始化WebSettings
         final WebSettings settings = webView.getSettings();
+        //开放JS的通道
+        settings.setJavaScriptEnabled(true);
         final String ua = settings.getUserAgentString();
         settings.setUserAgentString(ua+"Latte");
 
