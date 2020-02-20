@@ -53,4 +53,7 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
 //RecyclerView分割线
     implementation 'com.choices.divider:RecyclerView_Divider:1.0.0'
+    //glide依赖
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

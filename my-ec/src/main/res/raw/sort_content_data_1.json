@@ -1,0 +1,94 @@
+{
+  "code": 0,
+  "message": "ok",
+  "data": [
+    {
+      "id": 1,
+      "section": "标题1",
+      "goods": [
+        {
+          "goods_id": 3,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor1-1.jpg",
+          "goods_name": "品牌1"
+        },
+        {
+          "goods_id": 4,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor1-2.jpg",
+          "goods_name": "品牌2"
+        },
+        {
+          "goods_id": 5,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor1-3.jpg",
+          "goods_name": "品牌3"
+        },
+        {
+          "goods_id": 6,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor1-4.jpg",
+          "goods_name": "品牌4"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "section": "标题2",
+      "goods": [
+        {
+          "goods_id": 3,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor2-1.jpg",
+          "goods_name": "品牌1"
+        },
+        {
+          "goods_id": 4,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor2-2.jpg",
+          "goods_name": "品牌2"
+        },
+        {
+          "goods_id": 5,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor2-3.jpg",
+          "goods_name": "品牌3"
+        },
+        {
+          "goods_id": 6,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor2-4.jpg",
+          "goods_name": "品牌4"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "section": "标题3",
+      "goods": [
+        {
+          "goods_id": 3,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor3-1.jpg",
+          "goods_name": "品牌1"
+        },
+        {
+          "goods_id": 4,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor3-2.jpg",
+          "goods_name": "品牌2"
+        },
+        {
+          "goods_id": 5,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor3-3.jpg",
+          "goods_name": "品牌3"
+        },
+        {
+          "goods_id": 6,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor3-4.jpg",
+          "goods_name": "品牌4"
+        },
+        {
+          "goods_id": 6,
+          "goods_thumb": "https://mm.jiangjiesheng.cn/resource/floor3-5.jpg",
+          "goods_name": "品牌4"
+        },
+        {
+          "goods_id": 6,
+          "goods_thumb": "http://img1.imgtn.bdimg.com/it/u=3161877438,1385180237&fm=27&gp=0.jpg",
+          "goods_name": "品牌4"
+        }
+      ]
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import com.example.my.ec.R;
 import com.example.my.ec.R2;
 import com.example.my.ec.main.EcBottomDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
+import com.example.my_core.ui.loader.LatteLoader;
 import com.example.my_core.ui.recycler.BaseDecoration;
 import com.example.my_core.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;

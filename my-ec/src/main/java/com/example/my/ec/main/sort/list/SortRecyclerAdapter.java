@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.my.ec.R;
 import com.example.my.ec.main.sort.SortDelegate;
+import com.example.my.ec.main.sort.content.ContentDelegate;
+import com.example.my_core.delegates.LatteDelegate;
 import com.example.my_core.ui.recycler.ItemType;
 import com.example.my_core.ui.recycler.MultipleFields;
 import com.example.my_core.ui.recycler.MultipleItemEntity;
@@ -61,6 +63,7 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
 
 
                             final int contentId = getData().get(currentPosition).getField(MultipleFields.ID);
+                            showContent(contentId);
                         }
                     }
                 });
@@ -83,6 +86,20 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                 break;
             default:
                 break;
+        }
+    }
+
+    //显示右侧的内容
+    private void showContent(int contentId){
+        final ContentDelegate delegate = ContentDelegate.newInstance(contentId);
+        switchContent(delegate);
+    }
+
+    private void switchContent(ContentDelegate delegate){
+        final LatteDelegate contentDelegate  = DELEGATE.findChildFragment(ContentDelegate.class);
+        if(contentDelegate != null){
+            //是否要加入返回栈
+            contentDelegate.replaceFragment(delegate,false);
         }
     }
 }
