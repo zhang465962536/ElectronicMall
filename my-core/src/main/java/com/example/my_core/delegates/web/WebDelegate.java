@@ -6,6 +6,8 @@ import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
 
+import com.example.my_core.app.ConfigKeys;
+import com.example.my_core.app.Latte;
 import com.example.my_core.delegates.LatteDelegate;
 import com.example.my_core.delegates.web.route.LatteWebInterface;
 import com.example.my_core.delegates.web.route.RouteKeys;
@@ -53,8 +55,9 @@ public abstract class WebDelegate extends LatteDelegate implements IWebViewIniti
                 mWebView = initializer.initWebView(mWebView);
                 mWebView.setWebViewClient(initializer.initWebViewClient());
                 mWebView.setWebChromeClient(initializer.initWebChromeClient());
+                final String name = Latte.getConfiguration(ConfigKeys.JAVASCRIPT_INTERFACE);
                 //添加  JS接口 用于WebView 和原生 进行交互的
-                mWebView.addJavascriptInterface(LatteWebInterface.create(this), "latte");
+                mWebView.addJavascriptInterface(LatteWebInterface.create(this), name);
                 //可以使用WebView了
                 mIsWebViewAbailable = true;
             } else {

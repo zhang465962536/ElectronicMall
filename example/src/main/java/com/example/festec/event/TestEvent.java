@@ -1,10 +1,12 @@
-package com.example.my_core.delegates.web.event;
+package com.example.festec.event;
 
 import android.webkit.WebView;
 
+import com.example.my_core.delegates.web.event.Event;
 import com.example.my_core.util.log.ToastUtil;
 
-public class TestEvent extends Event{
+
+public class TestEvent extends Event {
 
     @Override
     public String execute(String params) {

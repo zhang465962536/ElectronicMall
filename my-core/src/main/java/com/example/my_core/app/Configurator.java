@@ -3,6 +3,10 @@ package com.example.my_core.app;
 import android.app.Activity;
 import android.os.Handler;
 
+import androidx.annotation.NonNull;
+
+import com.example.my_core.delegates.web.event.Event;
+import com.example.my_core.delegates.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -102,6 +106,20 @@ public class Configurator {
     //微信拉取回调Activity 时候 会需要一个Activity 的上下文 使用全局Application的Activity 是不合适的
     public final Configurator withActivity(Activity activity){
         LATTE_CONFIGS.put(ConfigKeys.ACTIVITY,activity);
+        return this;
+    }
+
+    //WEbView相关配置项
+    //添加注入名字
+    public Configurator withJavascriptInterface(@NonNull String name){
+        LATTE_CONFIGS.put(ConfigKeys.JAVASCRIPT_INTERFACE,name);
+        return this;
+    }
+
+    //添加事件名称
+    public Configurator withWebEvent(@NonNull String name,@NonNull Event event){
+        final EventManager manager =  EventManager.getInstance();
+        manager.addEvent(name,event);
         return this;
     }
 

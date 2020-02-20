@@ -8,6 +8,7 @@ import android.webkit.WebViewClient;
 
 import androidx.annotation.Nullable;
 
+import com.example.my_core.delegates.IPageLoadListener;
 import com.example.my_core.delegates.web.chromeclient.WebChromeClientImpl;
 import com.example.my_core.delegates.web.client.WebViewClientImpl;
 import com.example.my_core.delegates.web.route.RouteKeys;
@@ -15,6 +16,12 @@ import com.example.my_core.delegates.web.route.Router;
 
 //具体实现类e
 public class WebDelegateImpl extends WebDelegate{
+
+    private IPageLoadListener mIPageLoadListener = null;
+
+    public void setPageLoadListener(IPageLoadListener listener){
+        this.mIPageLoadListener = listener;
+    }
 
     //使用静态工厂方法 创建 WebDelegateImpl
     public static WebDelegateImpl create(String url){
@@ -52,6 +59,7 @@ public class WebDelegateImpl extends WebDelegate{
     @Override
     public WebViewClient initWebViewClient() {
         final WebViewClientImpl client = new WebViewClientImpl(this);
+        client.setPageLoadListener(mIPageLoadListener);
         return client;
     }
 
