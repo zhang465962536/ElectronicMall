@@ -123,6 +123,11 @@ public class Configurator {
         return this;
     }
 
+    //浏览器配置的Host
+    public Configurator withWebHost(String host){
+            LATTE_CONFIGS.put(ConfigKeys.WEB_HOST,host);
+            return this;
+    }
 
 
     //检查配置项目是否完成
