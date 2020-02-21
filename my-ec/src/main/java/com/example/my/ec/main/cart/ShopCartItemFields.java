@@ -7,5 +7,7 @@ public enum  ShopCartItemFields {
     ID,
     IMAGE_URL,
     COUNT,
-    PRICE
+    PRICE,
+    IS_SELECTED,
+    POSITION
 }
