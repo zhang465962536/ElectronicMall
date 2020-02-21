@@ -1,0 +1,38 @@
+{
+  "code": 0,
+  "message": "ok",
+  "data": [
+    {
+      "title": "商品标题1",
+      "desc": "商品详情描述1",
+      "id":1,
+      "price":1.006,
+      "count":2,
+      "thumb":"https://img.alicdn.com/imgextra/i1/725677994/TB29o3rtnqWBKNjSZFAXXanSpXa_!!725677994.jpg_430x430q90.jpg"
+    },
+    {
+      "title": "商品标题2",
+      "desc": "商品详情描述2",
+      "id":2,
+      "price":2.22,
+      "count":3,
+      "thumb":"https://img.alicdn.com/imgextra/i2/725677994/O1CN013FXX1J28vIjbKj7RC_!!725677994.jpg_430x430q90.jpg"
+    },
+    {
+      "title": "商品标题3",
+      "desc": "商品详情描述3",
+      "id":3,
+      "price":3.00,
+      "count":5,
+      "thumb":"https://img.alicdn.com/imgextra/i3/1875089687/O1CN01yhQVpq2LQhFW1qMUb_!!1875089687.jpg_430x430q90.jpg"
+    },
+    {
+      "title": "商品标题4",
+      "desc": "商品详情描述4",
+      "id":4,
+      "price":4.007,
+      "count":6,
+      "thumb":"https://img.alicdn.com/imgextra/i3/2372784938/O1CN01zt8PPe1mLeHzQNqxN_!!0-item_pic.jpg_430x430q90.jpg"
+    }
+  ]
+}
