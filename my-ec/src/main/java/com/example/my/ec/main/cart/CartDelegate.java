@@ -3,6 +3,8 @@ package com.example.my.ec.main.cart;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -11,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
+import com.example.my.ec.main.index.IndexDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
 import com.example.my_core.net.RestClient;
 import com.example.my_core.net.callback.ISuccess;
 import com.example.my_core.ui.recycler.MultipleItemEntity;
 import com.example.my_core.util.file.FileUtil;
+import com.example.my_core.util.log.ToastUtil;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
@@ -25,12 +29,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 //购物车
-public class CartDelegate extends BottomItemDelegate implements ISuccess {
+public class CartDelegate extends BottomItemDelegate implements ISuccess,ICartItemListener {
 
     @BindView(R2.id.rv_shop_cart)
     RecyclerView mRecyclerView = null;
     @BindView(R2.id.icon_shop_cart_select_all)
     IconTextView mIconSelectAll = null;
+    @BindView(R2.id.stub_no_item)
+    ViewStub mStubNoItem = null;
+    @BindView(R2.id.tv_shop_cart_total_price)
+    TextView mTotalPrice = null;
 
     private ShopCartAdapter mAdapter = null;
     private int mCurrentCount = 0; //记录当前选择框的数量
@@ -81,6 +89,7 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess {
                 mAdapter.notifyItemRangeChanged(removePosition, mAdapter.getItemCount());
             }
         }
+        checkItemCount();
 
     }
 
@@ -88,6 +97,25 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess {
     void onClickClear() {
         mAdapter.getData().clear();
         mAdapter.notifyDataSetChanged();
+        checkItemCount();
+    }
+
+    //检查Item数量
+    private void checkItemCount(){
+        final int count = mAdapter.getItemCount();
+        //如果购物车没有添加商品
+        if(count == 0){
+            final View stubView = mStubNoItem.inflate();
+            final TextView tvToBuy = stubView.findViewById(R.id.tv_stub_to_buy);
+            tvToBuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.QuickToast("您该购物了!");
+                    start(new IndexDelegate());
+                }
+            });
+            mRecyclerView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -104,6 +132,7 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         NoNet();
+        checkItemCount();
     }
 
     @Override
@@ -130,8 +159,16 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess {
         String json = FileUtil.getRawFile(R.raw.shop_cart_data);
         final ArrayList<MultipleItemEntity> data = new ShopCartDataConverter().setJsonData(json).convert();
         mAdapter = new ShopCartAdapter(data);
+        mAdapter.setCartItemListener(this);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+        checkItemCount();
+    }
+
+    @Override
+    public void onItemClick(double itemTotalPrice) {
+         final double price = mAdapter.getTotalPrice();
+        mTotalPrice.setText(String.valueOf(price));
     }
 }
