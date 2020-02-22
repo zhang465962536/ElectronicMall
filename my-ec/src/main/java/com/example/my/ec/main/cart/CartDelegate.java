@@ -38,11 +38,12 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess,ICartIt
     @BindView(R2.id.stub_no_item)
     ViewStub mStubNoItem = null;
     @BindView(R2.id.tv_shop_cart_total_price)
-    TextView mTotalPrice = null;
+    TextView mTvTotalPrice = null;
 
     private ShopCartAdapter mAdapter = null;
     private int mCurrentCount = 0; //记录当前选择框的数量
     private int mTotalCount = 0;  //购物车 商品 Item总数
+    private double mTotalPrice = 0.00 ;
 
     @OnClick(R2.id.icon_shop_cart_select_all)
     void onClickSelectAll() {
@@ -163,12 +164,14 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess,ICartIt
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+        mTotalPrice  = mAdapter.getTotalPrice();
+        mTvTotalPrice.setText(String.valueOf(mTotalPrice));
         checkItemCount();
     }
 
     @Override
     public void onItemClick(double itemTotalPrice) {
          final double price = mAdapter.getTotalPrice();
-        mTotalPrice.setText(String.valueOf(price));
+        mTvTotalPrice.setText(String.valueOf(price));
     }
 }

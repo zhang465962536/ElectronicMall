@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.my_core.net.callback.IError;
 import com.example.my_core.net.callback.IFailure;
 import com.example.my_core.net.callback.IRequest;
-import com.example.my_core.net.callback.ISuecess;
+import com.example.my_core.net.callback.ISuccess;
 import com.example.my_core.net.callback.RequestCallbacks;
 import com.example.my_core.net.download.DownloadHandler;
 import com.example.my_core.ui.loader.LatteLoader;
@@ -33,27 +33,25 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
     private final String URL;
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final IRequest REQUEST;
-    private final ISuecess SUECESS;
+    private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
     private final File FILE;
     private LoaderStyle LOADER_STYLE;
-    private final File FILE;
     private final Context CONTEXT;
 
-    public RestClient(String url, Map<String, Object> params, IRequest request, ISuecess suecess, IFailure failure, IError error, RequestBody body,File file,Context context,LoaderStyle loaderStyle) {
+    public RestClient(String url, Map<String, Object> params, IRequest request, ISuccess suecess, IFailure failure, IError error, RequestBody body,File file,Context context,LoaderStyle loaderStyle) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
-        this.SUECESS = suecess;
+        this.SUCCESS = suecess;
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
         this.FILE = file;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
-        this.FILE = file;
     }
 
     //创建构造者
@@ -115,7 +113,7 @@ public class RestClient {  // RestClient 在每次builder 去build 的时候 都
     private Callback<String> getRequestCallback(){
         return new RequestCallbacks(
                 REQUEST,
-                SUECESS,
+                SUCCESS,
                 FAILURE,
                 ERROR,
                 LOADER_STYLE

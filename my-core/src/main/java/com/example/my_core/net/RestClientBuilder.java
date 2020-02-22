@@ -23,7 +23,7 @@ public class RestClientBuilder {  //主要做传值操作
     //private  Map<String,Object> mParams;  //每次都需要去重新构建 在RestCreator声明一个全局变量即可
     private static final Map<String,Object> PARAMS = RestCreator.getParams();
     private  IRequest mIRequest = null;
-    private  ISuecess mISuecess = null;
+    private  ISuccess mISuccess = null;
     private  IFailure mIFailure = null;
     private  IError mIError = null;
     private  RequestBody mBody = null;
@@ -74,8 +74,8 @@ public class RestClientBuilder {  //主要做传值操作
     }
 
     //成功回调的处理
-    public final RestClientBuilder success(ISuecess iSuecess){
-        this.mISuecess = iSuecess;
+    public final RestClientBuilder success(ISuccess iSuccess){
+        this.mISuccess = iSuccess;
         return this;
     }
     //失败回调的处理
@@ -118,7 +118,7 @@ public class RestClientBuilder {  //主要做传值操作
     }
     //Build RestClient
     public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuecess,mIFailure,mIError,mBody,mFile,mContext,mLoaderStyle);
+        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIFailure,mIError,mBody,mFile,mContext,mLoaderStyle);
     }
 
 }
