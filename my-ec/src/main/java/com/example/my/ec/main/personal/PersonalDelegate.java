@@ -13,6 +13,7 @@ import com.example.my.ec.main.personal.list.ListAdapter;
 import com.example.my.ec.main.personal.list.ListBean;
 import com.example.my.ec.main.personal.list.ListItemType;
 import com.example.my.ec.main.personal.order.OrderListDelegate;
+import com.example.my.ec.main.personal.profile.UserProfileDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
 
 import java.util.ArrayList;
@@ -41,6 +42,11 @@ public class PersonalDelegate extends BottomItemDelegate {
     void onClickAllOrder(){
         mArgs.putString(ORDER_TYPE,"all");
         startOderListByType();
+    }
+
+    @OnClick(R2.id.img_user_profile)
+    void onClickAvatar(){
+        getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
     }
 
     @Override

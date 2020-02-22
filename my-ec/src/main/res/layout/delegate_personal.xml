@@ -16,7 +16,7 @@
             android:background="@android:color/holo_orange_dark">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_user_avatar"
+                android:id="@+id/img_user_profile"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
