@@ -13,9 +13,7 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
     public ListAdapter(List<ListBean> data) {
         super(data);
         //添加Item布局  以后将在RecyclerView进行显示
-        addItemType(30, R.layout.arrow_item_avatar);
         addItemType(ListItemType.ITEM_NORMAL, R.layout.arrow_item_layout);
-        addItemType(40, R.layout.arrow_switch_layout);
     }
 
     @Override

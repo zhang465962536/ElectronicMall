@@ -1,0 +1,27 @@
+{
+  "code": 0,
+  "message": "ok",
+  "data": [
+    {
+      "id": 1,
+      "thumb":"https://mm.jiangjiesheng.cn/resource/floor3-1.jpg",
+      "title":"商品标题1",
+      "price":1.006,
+      "time":"2018-6-5"
+    },
+    {
+      "id": 2,
+      "thumb":"https://mm.jiangjiesheng.cn/resource/floor3-2.jpg",
+      "title":"商品标题2",
+      "price":2.00,
+      "time":"2018-6-5"
+    },
+    {
+      "id": 3,
+      "thumb":"https://mm.jiangjiesheng.cn/resource/floor3-3.jpg",
+      "title":"商品标题3",
+      "price":3,
+      "time":"2018-6-5"
+    }
+  ]
+}
