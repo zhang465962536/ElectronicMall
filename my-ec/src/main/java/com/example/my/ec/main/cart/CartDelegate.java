@@ -24,6 +24,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -99,6 +100,36 @@ public class CartDelegate extends BottomItemDelegate implements ISuccess,ICartIt
         mAdapter.getData().clear();
         mAdapter.notifyDataSetChanged();
         checkItemCount();
+    }
+
+    @OnClick(R2.id.tv_shop_cart_pay)
+    void onClickPay(){
+
+    }
+
+
+    //创建订单
+    private void createOrder(){
+        final String orderUrl = "";
+        final WeakHashMap<String,Object> orderParams = new WeakHashMap<>();
+        orderParams.put("userid",123);
+        orderParams.put("amount",0.01);
+        orderParams.put("comment","测试支付");
+        orderParams.put("type",1);
+        orderParams.put("ordertype",0);
+        orderParams.put("isanonymous",true);
+        orderParams.put("followeduser",0);
+        RestClient.builder()
+                .url(orderUrl)
+                .params(orderParams)
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        //进行具体支付
+                    }
+                })
+        .build()
+        .post();
     }
 
     //检查Item数量
