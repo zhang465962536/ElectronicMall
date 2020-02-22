@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.Utils;
 import com.example.my_core.delegates.web.event.Event;
 import com.example.my_core.delegates.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
@@ -55,6 +56,8 @@ public class Configurator {
         initIcons();
         Logger.addLogAdapter(new AndroidLogAdapter());
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
+        //初始化工具包
+        Utils.init(Latte.getApplicationContext());
     }
 
     //配置API_HOST

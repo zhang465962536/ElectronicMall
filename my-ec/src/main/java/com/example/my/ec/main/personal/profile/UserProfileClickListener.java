@@ -2,15 +2,28 @@ package com.example.my.ec.main.personal.profile;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.example.my.ec.R;
 import com.example.my.ec.main.personal.list.ListBean;
 import com.example.my_core.delegates.LatteDelegate;
+import com.example.my_core.net.RestClient;
+import com.example.my_core.net.callback.ISuccess;
+import com.example.my_core.ui.camera.RequestCodes;
 import com.example.my_core.ui.date.DateDialogUtil;
+import com.example.my_core.ui.loader.LatteLoader;
+import com.example.my_core.util.callback.CallBackManager;
+import com.example.my_core.util.callback.CallBackType;
+import com.example.my_core.util.callback.IGlobalCallBack;
+import com.example.my_core.util.log.LatteLogger;
+import com.example.my_core.util.log.ToastUtil;
 
 public class UserProfileClickListener extends SimpleClickListener {
 
@@ -29,7 +42,45 @@ public class UserProfileClickListener extends SimpleClickListener {
         switch (id) {
             case 1:
                 //开始照相 或者选择 图片
+                CallBackManager.getInstance().addCallback(CallBackType.ON_CROP, new IGlobalCallBack<Uri>() {
+                    @Override
+                    public void executeCallBack(Uri args) {
+                        LatteLogger.d("ON_CROP",args);
+                        final ImageView avatar = view.findViewById(R.id.img_arrow_avatar);
+                        Glide.with(DELEGATE)
+                                .load(args)
+                                .into(avatar);
 
+                        //头像上传到服务器
+                       /* RestClient.builder()
+                                .url("")
+                                .loader(DELEGATE.getContext())
+                                .file(args.getPath())
+                                .success(new ISuccess() {
+                                    @Override
+                                    public void onSuccess(String response) {
+                                        final String path = JSON.parseObject(response).getJSONObject("result").getString("path");
+
+                                        //通知服务器更新信息
+                                        RestClient.builder()
+                                                .url("")
+                                                .params("avatar",path)
+                                                .loader(DELEGATE.getContext())
+                                                .success(new ISuccess() {
+                                                    @Override
+                                                    public void onSuccess(String response) {
+                                                        //获取更新后的用户信息 然后更新到本地数据库
+                                                        //没有本地数据库的app 每次打开APP都要请求API ,获取信息
+                                                    }
+                                                })
+                                                .build()
+                                                .post();
+                                    }
+                                })
+                                .build();*/
+                    }
+                });
+                DELEGATE.startCameraWithCheck();
                 break;
             case 2:
                 //姓名

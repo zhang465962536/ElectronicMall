@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -48,7 +49,10 @@ dependencies {
         exclude group: 'androidx.appcompat:appcompat'
         exclude group: 'com.google.android.material:material'
     })
-
+    //解决 Cannot fit requested classes in a single dex file (# methods: 70520 > 65536) 问题
+    implementation 'com.android.support:multidex:1.0.3'
+    //图片剪裁
+    implementation 'com.github.yalantis:ucrop:2.2.4-native'
 
 
 }
