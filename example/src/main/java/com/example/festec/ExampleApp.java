@@ -11,6 +11,9 @@ import com.example.festec.event.TestEvent;
 import com.example.my_core.net.interceptors.DebugInterceptor;
 import com.example.my_core.net.rx.AddCookieInterceptor;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+
+import cn.jpush.android.api.JPushInterface;
+
 //可变的配置 全部放在这里一次性配置完毕
 public class ExampleApp extends MultiDexApplication {
 
@@ -30,6 +33,9 @@ public class ExampleApp extends MultiDexApplication {
                 .withInterceptor(new AddCookieInterceptor())
                 .configure();
         MultiDex.install(this);
+        //开启极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
 

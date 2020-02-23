@@ -15,6 +15,7 @@ import com.example.my_core.activities.ProxyActivity;
 import com.example.my_core.app.Latte;
 import com.example.my_core.delegates.LatteDelegate;
 
+import cn.jpush.android.api.JPushInterface;
 import qiu.niorgai.StatusBarCompat;
 
 
@@ -31,6 +32,19 @@ public  class ExampleActivity extends ProxyActivity {
         Latte.getConfigurator().withActivity(this);
         //沉浸式状态栏
         StatusBarCompat.translucentStatusBar(this,true);
+    }
+
+    //极光推送 绑定消息
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 
     @Override
