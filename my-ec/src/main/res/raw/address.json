@@ -1,0 +1,27 @@
+{
+  "code": 0,
+  "message": "ok",
+  "data": [
+    {
+      "id": 1,
+      "default":true,
+      "name":"江节胜",
+      "phone":18226922501,
+      "address":"安徽省合肥市"
+    },
+    {
+      "id": 2,
+      "default":false,
+      "name":"江节胜",
+      "phone":18226922501,
+      "address":"江苏省南京市"
+    },
+    {
+      "id": 3,
+      "default":false,
+      "name":"老小江",
+      "phone":18652001768,
+      "address":"江苏省南京市雨花台区"
+    }
+  ]
+}
