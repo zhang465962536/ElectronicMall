@@ -15,6 +15,7 @@ import com.example.my.ec.main.personal.list.ListBean;
 import com.example.my.ec.main.personal.list.ListItemType;
 import com.example.my.ec.main.personal.order.OrderListDelegate;
 import com.example.my.ec.main.personal.profile.UserProfileDelegate;
+import com.example.my.ec.main.personal.settings.SettingsDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
 
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
+                .setDelegate(new SettingsDelegate())
                 .setText("系统设置")
                 .build();
 
