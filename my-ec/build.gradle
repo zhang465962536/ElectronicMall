@@ -58,4 +58,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+    //工具包
+    implementation 'com.blankj:utilcodex:1.26.0'
 }

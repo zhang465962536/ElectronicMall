@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
 import com.example.my.ec.main.EcBottomDelegate;
+import com.example.my.ec.main.index.search.SearchDelegate;
 import com.example.my_core.delegates.bottom.BottomItemDelegate;
 import com.example.my_core.ui.loader.LatteLoader;
 import com.example.my_core.ui.recycler.BaseDecoration;
@@ -30,7 +31,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 //首页
-public class IndexDelegate extends BottomItemDelegate {
+public class IndexDelegate extends BottomItemDelegate implements View.OnFocusChangeListener {
 
     @BindView(R2.id.rv_index)
     RecyclerView mRecyclerView = null;
@@ -50,14 +51,17 @@ public class IndexDelegate extends BottomItemDelegate {
             startScanWithCheck(this.getParentDelegate());
     }
 
+
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
         initRecyclerView();
         mRefreshHandler.firstPage(R.raw.index_data);
-
     }
+
+
 
     @Override
     public Object setLayout() {
@@ -74,6 +78,7 @@ public class IndexDelegate extends BottomItemDelegate {
                 ToastUtil.QuickToast("二维码内容是  " + args.toString());
             }
         });
+        mSearchView.setOnFocusChangeListener(this);
     }
 
     //初始化下拉刷新控件
@@ -103,5 +108,8 @@ public class IndexDelegate extends BottomItemDelegate {
         mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
    }
 
-
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        getParentDelegate().getSupportDelegate().start(new SearchDelegate());
+    }
 }

@@ -67,6 +67,7 @@ public final class LattePreference {
                 .getBoolean(key, false);
     }
 
+    //创建自定义的SP
     public static void addCustomAppProfile(String key, String val) {
         getAppPreference()
                 .edit()
@@ -77,5 +78,9 @@ public final class LattePreference {
     public static String getCustomAppProfile(String key) {
         return getAppPreference().getString(key, "");
     }
+
+
+
+
 
 }

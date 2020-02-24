@@ -22,8 +22,7 @@ import java.util.logging.Logger;
 //上下拉刷新 助手 OnRefreshListener 用于监听Refresh操作
 public class RefreshHandler implements
         SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener
-{
+        BaseQuickAdapter.RequestLoadMoreListener {
 
     //传入Layout
     private final SwipeRefreshLayout REFRESH_LAYOUT;
@@ -32,7 +31,7 @@ public class RefreshHandler implements
     private MultipleRecyclerAdapter mAdapter = null;
     private final DataConverter CONVERTER;
 
-    public RefreshHandler(SwipeRefreshLayout swiperefreshlayout,RecyclerView recyclerView,DataConverter converter,PagingBean bean) {
+    public RefreshHandler(SwipeRefreshLayout swiperefreshlayout, RecyclerView recyclerView, DataConverter converter, PagingBean bean) {
         this.REFRESH_LAYOUT = swiperefreshlayout;
         this.RECYCLERVIEW = recyclerView;
         this.CONVERTER = converter;
@@ -42,12 +41,12 @@ public class RefreshHandler implements
     }
 
     //静态简单工厂
-    public static RefreshHandler create(SwipeRefreshLayout swiperefreshlayout,RecyclerView recyclerView,DataConverter converter){
-        return new RefreshHandler(swiperefreshlayout,recyclerView,converter,new PagingBean());
+    public static RefreshHandler create(SwipeRefreshLayout swiperefreshlayout, RecyclerView recyclerView, DataConverter converter) {
+        return new RefreshHandler(swiperefreshlayout, recyclerView, converter, new PagingBean());
     }
 
 
-    private void refresh(){
+    private void refresh() {
         //开始加载
         REFRESH_LAYOUT.setRefreshing(true);
         //模拟网络请求
@@ -59,25 +58,25 @@ public class RefreshHandler implements
                 REFRESH_LAYOUT.setRefreshing(false);
 
             }
-        },2000);
+        }, 2000);
     }
 
     //有服务器的情况下
-    public void firstPage(String url){
+    public void firstPage(String url) {
         BEAN.setDelayed(1000);
         RestClient.builder()
-                .url("http://127.0.0.1:8080/EC/"+url)
+                .url("http://127.0.0.1:8080/EC/" + url)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.e("firstPage", "onSuccess: " + response );
+                        Log.e("firstPage", "onSuccess: " + response);
 
                         final JSONObject object = JSON.parseObject(response);
                         BEAN.setTotal(object.getInteger("total"))
                                 .setPageSize(object.getInteger("page_size"));
                         //设置Adapter
                         mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(response));
-                        mAdapter.setOnLoadMoreListener(RefreshHandler.this,RECYCLERVIEW);
+                        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
                         BEAN.addIndex();
                     }
@@ -87,7 +86,7 @@ public class RefreshHandler implements
     }
 
     //没有服务器情况下
-    public void firstPage(@RawRes int rawId){
+    public void firstPage(@RawRes int rawId) {
         BEAN.setDelayed(1000);
         final String json = FileUtil.getRawFile(rawId);
         Log.e("firstPage", "onSuccess: " + json);
@@ -97,11 +96,30 @@ public class RefreshHandler implements
                 .setPageSize(object.getInteger("page_size"));
         //设置Adapter
         mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(json));
-        mAdapter.setOnLoadMoreListener(RefreshHandler.this,RECYCLERVIEW);
+        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
         RECYCLERVIEW.setAdapter(mAdapter);
         BEAN.addIndex();
     }
 
+    //请求分页
+    private void paging(String url) {
+        final int pageSize = BEAN.getPageSize();
+        final int currentCount = BEAN.getCurrentCount();
+        final int total = BEAN.getTotal();
+        final int index = BEAN.getPageIndex();
+
+        if (mAdapter.getData().size() < pageSize || currentCount >= total) {
+            mAdapter.loadMoreEnd(true);
+        } else {
+            Latte.getHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    haveNet(url,index);
+                }
+            }, 1000);
+        }
+
+    }
 
 
     @Override
@@ -112,6 +130,32 @@ public class RefreshHandler implements
     //上拉刷新
     @Override
     public void onLoadMoreRequested() {
+        //paging("refresh.php?index=");
+    }
 
+    //有网络
+    private void haveNet(String url, int index) {
+        RestClient.builder()
+                .url(url + index)
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        mAdapter.addData(CONVERTER.setJsonData(response).convert());
+                        //累加数量
+                        BEAN.setCurrentCount(mAdapter.getData().size());
+                        mAdapter.loadMoreComplete();
+                        BEAN.addIndex();
+                    }
+                })
+                .build()
+                .get();
+    }
+    //没有网络
+    private void noNet(String json){
+        mAdapter.addData(CONVERTER.setJsonData(json).convert());
+        //累加数量
+        BEAN.setCurrentCount(mAdapter.getData().size());
+        mAdapter.loadMoreComplete();
+        BEAN.addIndex();
     }
 }
