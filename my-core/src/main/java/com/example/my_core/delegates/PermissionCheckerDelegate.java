@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import com.example.my_core.ui.camera.CameraImageBean;
 import com.example.my_core.ui.camera.LatteCamera;
 import com.example.my_core.ui.camera.RequestCodes;
+import com.example.my_core.ui.scanner.ScannerDelegate;
 import com.example.my_core.util.callback.CallBackManager;
 import com.example.my_core.util.callback.CallBackType;
 import com.example.my_core.util.callback.IGlobalCallBack;
@@ -39,8 +40,19 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
     }
 
     //这是真正调用的方法
+    @NeedsPermission(Manifest.permission.CAMERA)
     public void startCameraWithCheck() {
         PermissionCheckerDelegatePermissionsDispatcher.startCameraWithPermissionCheck(this);
+    }
+
+    //扫描二维码(不直接调用)
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void startScan(BaseDelegate delegate){
+        delegate.getSupportDelegate().startChildForResult(new ScannerDelegate(),RequestCodes.SCAN);
+    }
+
+    public void startScanWithCheck(BaseDelegate delegate){
+        PermissionCheckerDelegatePermissionsDispatcher.startScanWithPermissionCheck(this,delegate);
     }
 
 
@@ -124,4 +136,5 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
             }
         }
     }
+
 }

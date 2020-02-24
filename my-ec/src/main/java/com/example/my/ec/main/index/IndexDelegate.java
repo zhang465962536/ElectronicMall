@@ -18,11 +18,16 @@ import com.example.my_core.delegates.bottom.BottomItemDelegate;
 import com.example.my_core.ui.loader.LatteLoader;
 import com.example.my_core.ui.recycler.BaseDecoration;
 import com.example.my_core.ui.refresh.RefreshHandler;
+import com.example.my_core.util.callback.CallBackManager;
+import com.example.my_core.util.callback.CallBackType;
+import com.example.my_core.util.callback.IGlobalCallBack;
+import com.example.my_core.util.log.ToastUtil;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 //首页
 public class IndexDelegate extends BottomItemDelegate {
@@ -40,6 +45,11 @@ public class IndexDelegate extends BottomItemDelegate {
 
     private RefreshHandler mRefreshHandler = null;
 
+    @OnClick(R2.id.icon_index_scan)
+    void onClickScanQrCode(){
+            startScanWithCheck(this.getParentDelegate());
+    }
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
@@ -56,8 +66,14 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
-
+        mRefreshHandler  = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
+        //添加扫描二维码事件回调
+        CallBackManager.getInstance().addCallback(CallBackType.ON_SCAN, new IGlobalCallBack() {
+            @Override
+            public void executeCallBack(Object args) {
+                ToastUtil.QuickToast("二维码内容是  " + args.toString());
+            }
+        });
     }
 
     //初始化下拉刷新控件
