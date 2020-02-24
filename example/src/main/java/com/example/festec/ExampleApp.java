@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import com.example.festec.event.ShareEvent;
 import com.example.my.ec.icon.FontEcModule;
 import com.example.my_core.app.Latte;
 import com.example.festec.event.TestEvent;
@@ -32,6 +33,7 @@ public class ExampleApp extends MultiDexApplication {
                 .withWebEvent("test", new TestEvent())
                 //浏览器配置的Host
                 .withWebHost("https://www.baidu.com/")
+                .withWebEvent("share",new ShareEvent())
                 //添加cookie同步拦截器
                 .withInterceptor(new AddCookieInterceptor())
                 .configure();
