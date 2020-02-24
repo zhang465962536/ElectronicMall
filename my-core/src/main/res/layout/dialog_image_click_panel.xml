@@ -27,22 +27,6 @@
 
 
     <Button
-        android:id="@+id/dialog_image_clicked_btn_undetermined"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_border_nativephoto"
-        android:text="待定"
-        android:textColor="#323232" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:gravity="center" />
-
-    <Button
         android:id="@+id/dialog_image_clicked_btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
