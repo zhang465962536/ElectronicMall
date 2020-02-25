@@ -1,13 +1,16 @@
 package com.example.my.ec.detail;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -112,6 +115,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         String json = FileUtil.getRawFile(R.raw.goods_detail_data);
         final JSONObject data = JSON.parseObject(json).getJSONObject("data");
         initBanner(data);
+        initGoodsInfo(data);
     }
 
     //返回数据
@@ -125,10 +129,24 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
                     public void onSuccess(String response) {
                         final JSONObject data = JSON.parseObject(response).getJSONObject("data");
                         initBanner(data);
+                        initGoodsInfo(data);
                     }
                 })
                 .build()
                 .get();
+    }
+
+    private void initTabLayout(){
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getContext(),R.color.app_main));
+        mTabLayout.setBackgroundColor(Color.WHITE);
+        mTabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void initGoodsInfo(JSONObject data){
+        final String goodsData = data.toJSONString();
+        getSupportDelegate().loadRootFragment(R.id.frame_goods_info,GoodsInfoDelegate.create(goodsData));
     }
 
     private void initBanner(JSONObject data){
