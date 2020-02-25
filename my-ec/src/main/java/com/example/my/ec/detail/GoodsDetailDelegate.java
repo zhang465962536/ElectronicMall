@@ -19,13 +19,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.my.ec.R;
 import com.example.my.ec.R2;
 import com.example.my_core.delegates.LatteDelegate;
 import com.example.my_core.net.RestClient;
 import com.example.my_core.net.callback.ISuccess;
+import com.example.my_core.ui.animation.BezierAnimation;
+import com.example.my_core.ui.animation.BezierUtil;
 import com.example.my_core.ui.banner.HolderCreator;
 import com.example.my_core.ui.widget.CircleTextView;
 import com.example.my_core.util.file.FileUtil;
@@ -39,10 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.OnOffsetChangedListener {
+public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.OnOffsetChangedListener, BezierUtil.AnimationListener {
 
     @BindView(R2.id.goods_detail_toolbar)
     Toolbar mToolbar = null;
@@ -70,7 +76,9 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
     private static final String ARG_GOODS_ID = "ARG_GOODS_ID";
     private int mGoodsId = -1;
 
+    //目标图片Url
     private String mGoodsThumbUrl = null;
+    //购物车里面商品数量
     private int mShopCount = 0;
 
     private static final RequestOptions OPTIONS = new RequestOptions()
@@ -78,6 +86,24 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
             .centerCrop()
             .dontAnimate()
             .override(100, 100);
+
+    @OnClick(R2.id.rl_add_shop_cart)
+    void onClickAddShopCart(){
+        final CircleImageView animImg = new CircleImageView(getContext());
+        Glide.with(getContext())
+                .load(mGoodsThumbUrl)
+                .apply(OPTIONS)
+                .into(animImg);
+        //添加动画
+        BezierAnimation.addCart(this, mRlAddShopCart, mIconShopCart, animImg, this);
+    }
+
+    private void setShopCartCount(JSONObject data){
+        mGoodsThumbUrl = data.getString("thumb");
+        if(mShopCount == 0){
+            mCircleTextView.setVisibility(View.GONE);
+        }
+    }
 
     //传入商品id
     public static GoodsDetailDelegate create(@NonNull int goodsId){
@@ -108,6 +134,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         //伸缩变化的颜色
         mCollapsingToolbarLayout.setContentScrimColor(Color.WHITE);
+        mCircleTextView.setCircleBackground(Color.RED);
         mAppBar.addOnOffsetChangedListener(this);
         initNoNetData();
         initTabLayout();
@@ -119,6 +146,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         initBanner(data);
         initGoodsInfo(data);
         initPager(data);
+        setShopCartCount(data);
     }
 
     //返回数据
@@ -182,5 +210,31 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
 
+    }
+
+    @Override
+    public void onAnimationEnd() {
+        YoYo.with(new ScaleUpAnimator())
+                .duration(500)
+                .playOn(mIconShopCart);
+        //动画结束后购物车数量+1
+        mShopCount++;
+        mCircleTextView.setVisibility(View.VISIBLE);
+        mCircleTextView.setText(String.valueOf(mShopCount));
+    }
+
+    private void haveNet(){
+        RestClient.builder()
+                .url("add_shop_cart_count")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        mCircleTextView.setVisibility(View.VISIBLE);
+                        mCircleTextView.setText(String.valueOf(mShopCount));
+                    }
+                })
+                .params("count",mShopCount)
+                .build()
+                .post();
     }
 }
