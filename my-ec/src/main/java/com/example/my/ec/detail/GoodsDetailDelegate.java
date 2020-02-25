@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -109,6 +110,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         mCollapsingToolbarLayout.setContentScrimColor(Color.WHITE);
         mAppBar.addOnOffsetChangedListener(this);
         initNoNetData();
+        initTabLayout();
     }
 
     private void initNoNetData() {
@@ -116,6 +118,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         final JSONObject data = JSON.parseObject(json).getJSONObject("data");
         initBanner(data);
         initGoodsInfo(data);
+        initPager(data);
     }
 
     //返回数据
@@ -134,6 +137,11 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
                 })
                 .build()
                 .get();
+    }
+
+    private void initPager(JSONObject data){
+        final PagerAdapter adapter =  new TabPagerAdapter(getFragmentManager(),data);
+        mViewPager.setAdapter(adapter);
     }
 
     private void initTabLayout(){
