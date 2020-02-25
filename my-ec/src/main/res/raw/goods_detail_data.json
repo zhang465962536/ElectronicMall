@@ -1,0 +1,42 @@
+{
+  "code": 0,
+  "message": "ok",
+  "data": {
+    "content": "内容描述",
+    "banners": [
+      "https://bkimg.cdn.bcebos.com/pic/7aec54e736d12f2ed9a9880c40c2d56285356829?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2UxNTA=,xp_5,yp_5",
+      "https://bkimg.cdn.bcebos.com/pic/359b033b5bb5c9ea7fc3e9a5db39b6003af3b340?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U5Mg==,xp_5,yp_5",
+      "https://bkimg.cdn.bcebos.com/pic/2fdda3cc7cd98d108ce4e6772f3fb80e7bec9040?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2UxMTY=,xp_5,yp_5"
+    ],
+    "tabs": [
+      {
+        "name": "商品详情",
+        "pictures": [
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-1.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-2.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-3.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-4.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-5.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-6.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-7.png"
+        ]
+      },
+      {
+        "name": "规格参数",
+        "pictures": [
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-args-1.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-args-2.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-args-3.png",
+          "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/detail-p20-args-4.png"
+        ]
+      }
+    ],
+    "specifications": "规格参数",
+    "inventory": "商品中包含了哪些东西的清单",
+    "id": 1,
+    "name": "华为P20 6GB+128GB 蓝色",
+    "description": "HUAWEI P20 系列 眼界大开。华为 | 徕卡 联合设计。4000万像素徕卡三镜头，AI摄影大师，暗光更出色",
+    "price": 12.00,
+    "thumb": "http://tech.jiangjiesheng.cn/dev/resource/img/JS-ElectronicCommerce/imgs/add-cart.png"
+  }
+}
